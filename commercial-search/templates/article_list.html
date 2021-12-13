@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h1>Articles</h1>
+<ul>
+    {% for article in articles %}
+        <li><a href="/article/{{ quote(article.title)}}" target="_self">{{article.title}}</href></li>
+    {% endfor %}
+</ul>
+<b><a href="/{{page+1}}" target="_self">Next Page &gt;</a></b>
+{% endblock %}
