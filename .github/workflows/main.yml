@@ -32,4 +32,4 @@ jobs:
           REMOTE_USER: ${{ secrets.SRCF_USER }}
           SOURCE: commercial-search/
           TARGET: ${{ secrets.DEPLOY_DIR }}
-          ARGS: -azv --delete --omit-dir-times --no-perms --exclude '.htaccess'
+          ARGS: -azv --delete --omit-dir-times --no-perms --exclude '.htaccess' --exclude '*.log' --exclude 'run.sh' --exclude '*.db' --exclude '*.sock'
