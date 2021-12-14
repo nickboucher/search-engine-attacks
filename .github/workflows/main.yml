@@ -33,3 +33,11 @@ jobs:
           SOURCE: commercial-search/
           TARGET: ${{ secrets.DEPLOY_DIR }}
           ARGS: -azv --delete --omit-dir-times --no-perms --exclude '.htaccess' --exclude '*.log' --exclude 'run.sh' --exclude '*.db' --exclude '*.sock'
+          
+      - name: SSH Remote Commands
+        uses: appleboy/ssh-action@1d1b21ca96111b1eb4c03c21c14ebb971d2200f6
+        with:
+          host: ${{ secrets.SRCF_HOST }}
+          username: ${{ secrets.SRCF_USER }}
+          key: ${{ secrets.SRCF_RSA }}
+          script: systemctl --user restart babel
