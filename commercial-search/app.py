@@ -37,7 +37,7 @@ def subdomain_list():
 @app.route("/", subdomain="<perturbation>")
 @app.route("/<int:page>", subdomain="<perturbation>")
 def article_list(perturbation, page=1):
-    articles = Article.query(Article.title).order_by(Article.title.asc()).paginate(page,25,error_out=False).items
+    articles = db.session.query(Article.title).order_by(Article.title.asc()).paginate(page,25,error_out=False).items
     if not articles:
         abort(404)
     perturb(articles, perturbation, False)
