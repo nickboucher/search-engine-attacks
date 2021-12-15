@@ -5,11 +5,13 @@
 # Flask server app for SimpleWiki clone.
 #
 from flask import Flask, render_template, request, abort
+from flask.cli import load_dotenv
 from urllib.parse import quote, unquote
 from typing import List
 from models import db, Article
 from cli import load_db
 
+load_dotenv()
 app = Flask(__name__)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.init_app(app)
