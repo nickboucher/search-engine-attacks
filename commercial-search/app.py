@@ -25,7 +25,7 @@ def perturb(articles: List[Article]|Article, perturbation: str, perturb_text=Tru
             case 'base' : return input
             case _ : abort(404)
     if articles:
-        if isinstance(Article, list) : articles = [articles]
+        if isinstance(articles, Article) : articles = [articles]
         for article in articles:
             _perturb(article.title)
             if perturb_text : _perturb(article.text)
