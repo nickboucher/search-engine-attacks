@@ -38,11 +38,15 @@ def subdomain_list():
 @app.route("/<int:page>", subdomain="<perturbation>")
 def article_list(perturbation, page=1):
     articles = Article.query.order_by(Article.title.asc()).paginate(page,25,error_out=False).items
+    if not articles:
+        abort(404)
     perturb(articles, perturbation, False)
     return render_template('article_list.html', articles=articles.items, quote=quote, page=page)
 
 @app.route("/article/<title>", subdomain="<perturbation>")
 def article(title, perturbation):
     article = Article.query.filter_by(title=unquote(title)).first()
+    if not article:
+        abort(404)
     perturb(article, perturbation)
     return render_template('article.html', article=article)
