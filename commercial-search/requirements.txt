@@ -5,3 +5,4 @@ wikitextparser
 flask
 flask_sqlalchemy
 python-dotenv
+click

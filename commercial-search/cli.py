@@ -4,6 +4,8 @@
 # Nicholas Boucher - December 2021
 # Downloads SimpleWikipedia dump and loads into SQL DB.
 #
+import click
+from flask.cli import with_appcontext
 from urllib.request import urlopen
 from shutil import copyfileobj
 from os import remove
@@ -13,8 +15,9 @@ from re import sub
 from html2text import html2text as htt
 import wikitextparser as wtp
 from flask import Flask
-from models import db, Article
+from models import Article
 from constants import SIMPLE_WIKI_URL, TMP_FILE
+from app import app, db
 
 def dewiki(text):
     text = wtp.parse(text).plain_text()  # wiki to plaintext 
@@ -52,22 +55,22 @@ def save_article(article):
 
 def process_file_text(filename):
     article = ''
-    # create Flask server for DB interactions
-    app = Flask(__name__)
-    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-    with app.app_context():
-        db.init_app(app)
-        db.create_all()
-        with open(filename, 'r', encoding='utf-8') as infile:
-            for line in infile:
-                if '<page>' in line:
-                    article = ''
-                elif '</page>' in line:  # end of article
-                    save_article(article)
-                else:
-                    article += line                
+    # Create table
+    db.create_all()
+    # Delete existing exntries, if any
+    Article.query.delete()
+    with open(filename, 'r', encoding='utf-8') as infile:
+        for line in infile:
+            if '<page>' in line:
+                article = ''
+            elif '</page>' in line:  # end of article
+                save_article(article)
+            else:
+                article += line                
 
-def main():
+@click.command('load-db')
+@with_appcontext
+def load_db():
     # Define temp files
     bz2_temp = TMP_FILE+'.bz2'
     xml_temp = TMP_FILE+'.xml'

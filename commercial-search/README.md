@@ -11,7 +11,7 @@ For reproducability, this script uses the Simple Wikipedia dump from 2021-11-20.
 Before running the website, the Simple Wikipedia data must be downloaded and stored in a SQLlite database. This only needs to be done once, and can be performed with:
 
 ```
-./setup.py
+flask load-db
 ```
 This script is largely based on David Shapiro's [PlainTextWikipedia](https://github.com/daveshap/PlainTextWikipedia).
 
