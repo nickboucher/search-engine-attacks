@@ -9,11 +9,12 @@ from flask_sqlalchemy import SQLAlchemy
 from urllib.parse import quote, unquote
 from typing import List
 from models import Article
-from constants import SQL_DB
+from constants import SQL_DB, HOST
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///'+SQL_DB
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SERVER_NAME'] = HOST
 db = SQLAlchemy(app)
 
 subdomains = ['base']
@@ -23,10 +24,11 @@ def perturb(articles: List[Article]|Article, perturbation: str, perturb_text=Tru
         match perturbation:
             case 'base' : return input
             case _ : abort(404)
-    if isinstance(Article, list) : articles = [articles]
-    for article in articles:
-        _perturb(article.title)
-        if perturb_text : _perturb(article.text)
+    if articles:
+        if isinstance(Article, list) : articles = [articles]
+        for article in articles:
+            _perturb(article.title)
+            if perturb_text : _perturb(article.text)
 
 @app.route("/")
 def subdomain_list():

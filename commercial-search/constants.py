@@ -9,3 +9,5 @@ SIMPLE_WIKI_URL = 'https://dumps.wikimedia.org/simplewiki/20211201/simplewiki-20
 TMP_FILE = './simplewiki'
 
 SQL_DB = 'simplewiki.db'
+
+HOST = 'babelsearch.ml'
