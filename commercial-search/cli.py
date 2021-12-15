@@ -9,15 +9,13 @@ from flask.cli import with_appcontext
 from urllib.request import urlopen
 from shutil import copyfileobj
 from os import remove
-from os.path import exists
 from bz2 import decompress
 from re import sub
 from html2text import html2text as htt
 import wikitextparser as wtp
-from flask import Flask
 from models import Article
 from constants import SIMPLE_WIKI_URL, TMP_FILE
-from app import app, db
+from app import db
 
 def dewiki(text):
     text = wtp.parse(text).plain_text()  # wiki to plaintext 
@@ -99,6 +97,3 @@ def load_db():
 
     # Confirm success
     print(f'Successfully built Simple Wikipedia database.')
-
-if __name__ == '__main__':
-    main()
