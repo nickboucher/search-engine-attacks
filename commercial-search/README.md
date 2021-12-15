@@ -14,3 +14,5 @@ Before running the website, the Simple Wikipedia data must be downloaded and sto
 ./setup.py
 ```
 This script is largely based on David Shapiro's [PlainTextWikipedia](https://github.com/daveshap/PlainTextWikipedia).
+
+You must also replace the values in env.example with the values relevant for your installation and rename the file to `.env`.

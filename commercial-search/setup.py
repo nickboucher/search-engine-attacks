@@ -2,7 +2,7 @@
 #
 # setup.py
 # Nicholas Boucher - December 2021
-# Downloads SimpleWikipedia dump and loads into SQLite DB.
+# Downloads SimpleWikipedia dump and loads into SQL DB.
 #
 from urllib.request import urlopen
 from shutil import copyfileobj
@@ -14,7 +14,7 @@ from html2text import html2text as htt
 import wikitextparser as wtp
 from flask import Flask
 from models import db, Article
-from constants import SIMPLE_WIKI_URL, TMP_FILE, SQL_DB
+from constants import SIMPLE_WIKI_URL, TMP_FILE
 
 def dewiki(text):
     text = wtp.parse(text).plain_text()  # wiki to plaintext 
@@ -54,7 +54,6 @@ def process_file_text(filename):
     article = ''
     # create Flask server for DB interactions
     app = Flask(__name__)
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///'+SQL_DB
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     with app.app_context():
         db.init_app(app)
@@ -87,13 +86,8 @@ def main():
     print("Removing compressed archive...")
     remove(bz2_temp)
 
-    # Remove existing DB if it exists
-    if exists(SQL_DB):
-        print(f"Removing existing SQLite DB at {SQL_DB}.")
-        remove(SQL_DB)
-
-    # Process WikiXML into SQLite
-    print("Loading data in SQLite DB...")
+    # Process WikiXML into SQL
+    print("Loading data into SQL DB...")
     process_file_text(xml_temp)
 
     # Delete decompressed temp file
@@ -101,7 +95,7 @@ def main():
     remove(xml_temp)
 
     # Confirm success
-    print(f'Successfully built Simple Wikipedia database at {SQL_DB}.')
+    print(f'Successfully built Simple Wikipedia database.')
 
 if __name__ == '__main__':
     main()

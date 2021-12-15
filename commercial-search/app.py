@@ -9,12 +9,9 @@ from flask_sqlalchemy import SQLAlchemy
 from urllib.parse import quote, unquote
 from typing import List
 from models import Article
-from constants import SQL_DB, HOST
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///'+SQL_DB
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SERVER_NAME'] = HOST
 db = SQLAlchemy(app)
 
 subdomains = ['base']
