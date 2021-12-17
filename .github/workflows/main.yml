@@ -27,9 +27,9 @@ jobs:
       - name: SSH Deploy
         uses: easingthemes/ssh-deploy@191986574c0735ffad7ae1a297a414d6e6f95375
         with:
-          SSH_PRIVATE_KEY: ${{ secrets.SRCF_RSA }}
-          REMOTE_HOST: ${{ secrets.SRCF_HOST }}
-          REMOTE_USER: ${{ secrets.SRCF_USER }}
+          SSH_PRIVATE_KEY: ${{ secrets.DEPLOY_RSA }}
+          REMOTE_HOST: ${{ secrets.DEPLOY_HOST }}
+          REMOTE_USER: ${{ secrets.DEPLOY_USER }}
           SOURCE: commercial-search/
           TARGET: ${{ secrets.DEPLOY_DIR }}
           ARGS: -azv --delete --omit-dir-times --no-perms --exclude '.htaccess' --exclude '*.log' --exclude 'run.sh' --exclude '*.db' --exclude '*.sock' --exclude '.env'
@@ -37,7 +37,7 @@ jobs:
       - name: SSH Remote Commands
         uses: appleboy/ssh-action@1d1b21ca96111b1eb4c03c21c14ebb971d2200f6
         with:
-          host: ${{ secrets.SRCF_HOST }}
-          username: ${{ secrets.SRCF_USER }}
-          key: ${{ secrets.SRCF_RSA }}
-          script: systemctl --user restart babel
+          host: ${{ secrets.DEPLOY_HOST }}
+          username: ${{ secrets.DEPLOY_USER }}
+          key: ${{ secrets.DEPLOY_RSA }}
+          script: systemctl --user restart badsearch
