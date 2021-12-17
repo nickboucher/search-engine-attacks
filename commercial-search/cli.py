@@ -13,6 +13,7 @@ from bz2 import decompress
 from re import sub
 from html2text import html2text as htt
 import wikitextparser as wtp
+from tqdm import tqdm
 from models import Article
 from constants import SIMPLE_WIKI_URL, TMP_FILE
 from app import db
@@ -46,7 +47,6 @@ def analyze_chunk(text):
 def save_article(article):
     doc = analyze_chunk(article)
     if doc:
-        print('SAVING:', doc['title'])
         entry = Article(doc['id'], doc['title'], doc['text'])
         db.session.add(entry)
         db.session.commit()
@@ -58,7 +58,7 @@ def process_file_text(filename):
     # Delete existing exntries, if any
     Article.query.delete()
     with open(filename, 'r', encoding='utf-8') as infile:
-        for line in infile:
+        for line in tqdm(infile, desc="Processing Export"):
             if '<page>' in line:
                 article = ''
             elif '</page>' in line:  # end of article
