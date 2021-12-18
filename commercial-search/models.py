@@ -5,6 +5,7 @@
 # Contains DB models.
 #
 from flask_sqlalchemy import SQLAlchemy
+from typing import Callable
 
 # Initialize db variable to avoid namespace errors
 # ('db' must be imported by application later)
@@ -23,7 +24,7 @@ class Article(db.Model):
     def __repr__(self) -> str:
         return '<Article %r>' % self.title
 
-    def perturb(self, func: Callable[str,str]) -> None:
+    def perturb(self, func: Callable[[str],str]) -> None:
         '''Applys the per-word perturbations supplied in place.'''
         title = self.title.split(' ')
         text = self.text.split(' ')
