@@ -23,7 +23,7 @@ def perturb(articles: List[Article]|Article, perturbation: str, perturb_text=Tru
     def _perturb(input: str) -> str:
         match perturbation:
             case 'base' : return input
-            case 'zwsp': article.perturb(lambda w : w[:int(len(w)/2)] + "\u200b" + w[int(len(w)/2):])
+            case 'zwsp' : return article.perturb(lambda w : w[:int(len(w)/2)] + "\u200b" + w[int(len(w)/2):])
             case _ : abort(404)
     if articles:
         if isinstance(articles, Article) : articles = [articles]
