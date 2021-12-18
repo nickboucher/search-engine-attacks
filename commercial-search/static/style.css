@@ -3,11 +3,21 @@ body {
 }
 
 .sidebar {
-    min-width: 10%;
+    display: inline-block;
+    width: 10%;
+    vertical-align: top;
 }
 
 .content {
     display: inline-block;
-    min-width: 90%;
+    width: 90%;
     border: 1px solid #a7d7f9;
+    padding: 2em;
+    box-sizing: border-box;
+    background-color: white;
+    margin-top: 4em;
+}
+
+.logo {
+    width: 100%;
 }

@@ -7,7 +7,7 @@
         <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
     </head>
     <body>
-        <div class="sidebar"><h2>Bad Search Wiki</h2></div>
+        <div class="sidebar"><img src="{{ url_for('static', filename='logo.png') }}" class="logo" /></div>
         <div class="content">
             {% block content %}{% endblock %}
         </div>
