@@ -6,16 +6,17 @@ body {
     display: inline-block;
     width: 10%;
     vertical-align: top;
+    margin-top: 1em;
 }
 
 .content {
     display: inline-block;
-    width: 90%;
+    width: 89%;
     border: 1px solid #a7d7f9;
     padding: 2em;
     box-sizing: border-box;
     background-color: white;
-    margin-top: 4em;
+    margin-top: 3em;
 }
 
 .logo {
