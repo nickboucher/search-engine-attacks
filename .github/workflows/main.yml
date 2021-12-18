@@ -40,4 +40,4 @@ jobs:
           host: ${{ secrets.DEPLOY_HOST }}
           username: ${{ secrets.DEPLOY_USER }}
           key: ${{ secrets.DEPLOY_RSA }}
-          script: systemctl --user restart badsearch
+          script: sudo systemctl restart badsearch
