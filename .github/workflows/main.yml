@@ -1,4 +1,4 @@
-name: Deploy to SRCF
+name: Deploy to badsearch.ml
 
 # Controls when the action will run. 
 on:

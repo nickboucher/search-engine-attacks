@@ -17,12 +17,13 @@ for key, val in dotenv_values().items():
 db.init_app(app)
 app.cli.add_command(load_db)
 
-subdomains = ['base']
+subdomains = ['base', 'zwsp']
 
 def perturb(articles: List[Article]|Article, perturbation: str, perturb_text=True) -> None:
     def _perturb(input: str) -> str:
         match perturbation:
             case 'base' : return input
+            case 'zwsp': article.perturb(lambda w : w[:int(len(w)/2)] + "\u200b" + w[int(len(w)/2):])
             case _ : abort(404)
     if articles:
         if isinstance(articles, Article) : articles = [articles]

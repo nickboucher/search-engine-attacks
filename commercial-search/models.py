@@ -22,3 +22,16 @@ class Article(db.Model):
 
     def __repr__(self) -> str:
         return '<Article %r>' % self.title
+
+    def perturb(self, func: Callable[str,str]) -> None:
+        '''Applys the per-word perturbations supplied in place.'''
+        title = self.title.split(' ')
+        text = self.text.split(' ')
+        for i, word in enumerate(title):
+            if word:
+                title[i] = func(word)
+        for i, word in enumerate(text):
+            if word:
+                text[i] = func(word)
+        self.title = ' '.join(title)
+        self.text = ' '.join(text)
