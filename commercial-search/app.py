@@ -6,7 +6,7 @@
 #
 from flask import Flask, render_template, request, abort
 from dotenv import dotenv_values
-from urllib.parse import quote, unquote
+from urllib.parse import unquote
 from typing import List
 from models import db, Article
 from cli import load_db
@@ -37,11 +37,11 @@ def subdomain_list():
 @app.route("/", subdomain="<perturbation>")
 @app.route("/<int:page>", subdomain="<perturbation>")
 def article_list(perturbation, page=1):
-    articles = db.session.query(Article.title).order_by(Article.title.asc()).paginate(page,25,error_out=False).items
-    if not articles:
+    articles = db.session.query(Article.title).order_by(Article.title.asc()).paginate(page,25)
+    if not articles.items:
         abort(404)
-    perturb(articles, perturbation, False)
-    return render_template('article_list.html', articles=articles, quote=quote, page=page)
+    perturb(articles.items, perturbation, False)
+    return render_template('article_list.html', articles=articles)
 
 @app.route("/article/<title>", subdomain="<perturbation>")
 def article(title, perturbation):
