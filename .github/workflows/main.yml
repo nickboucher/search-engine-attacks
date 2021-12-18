@@ -32,7 +32,7 @@ jobs:
           REMOTE_USER: ${{ secrets.DEPLOY_USER }}
           SOURCE: commercial-search/
           TARGET: ${{ secrets.DEPLOY_DIR }}
-          ARGS: -azv --delete --omit-dir-times --no-perms --exclude '.htaccess' --exclude '*.log' --exclude 'run.sh' --exclude '*.db' --exclude '*.sock' --exclude '.env'
+          ARGS: -azv --delete --omit-dir-times --no-perms --exclude '.htaccess' --exclude '*.log' --exclude 'run.sh' --exclude '*.db' --exclude '*.sock' --exclude '.env' --exclude '__pycache__'
           
       - name: SSH Remote Commands
         uses: appleboy/ssh-action@1d1b21ca96111b1eb4c03c21c14ebb971d2200f6
