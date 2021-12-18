@@ -28,8 +28,9 @@ def perturb(articles: List[Article]|Article, perturbation: str, perturb_text=Tru
     if articles:
         if isinstance(articles, Article) : articles = [articles]
         for article in articles:
-            _perturb(article.title)
-            if perturb_text : _perturb(article.text)
+            article.title = _perturb(article.title)
+            if perturb_text:
+                article.text = _perturb(article.text)
 
 @app.route("/")
 def subdomain_list():
