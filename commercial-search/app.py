@@ -10,6 +10,7 @@ from urllib.parse import unquote
 from typing import List
 from models import db, Article
 from cli import load_db
+from perturbations import perturbations, unperturb
 
 app = Flask(__name__)
 for key, val in dotenv_values().items():
@@ -17,38 +18,25 @@ for key, val in dotenv_values().items():
 db.init_app(app)
 app.cli.add_command(load_db)
 
-subdomains = ['base', 'zwsp']
-
-def perturb(articles: List[Article]|Article, perturbation: str, perturb_text=True) -> None:
-    def _perturb(input: str) -> str:
-        match perturbation:
-            case 'base' : return input
-            case 'zwsp' : return input[:int(len(input)/2)] + "\u200b" + input[int(len(input)/2):]
-            case _ : abort(404)
-    if articles:
-        if isinstance(articles, Article) : articles = [articles]
-        for article in articles:
-            article.title = _perturb(article.title)
-            if perturb_text:
-                article.text = _perturb(article.text)
-
 @app.route("/")
 def subdomain_list():
-    return render_template('subdomain_list.html', subdomains=subdomains, host=request.host)
+    return render_template('subdomain_list.html', subdomains=perturbations, host=request.host)
 
 @app.route("/", subdomain="<perturbation>")
 @app.route("/<int:page>", subdomain="<perturbation>")
 def article_list(perturbation, page=1):
-    articles = db.session.query(Article.title).order_by(Article.title.asc()).paginate(page,25)
+    # Query only titles for efficiency
+    articles = db.session.query(Article.title).paginate(page,25)
     if not articles.items:
         abort(404)
-    perturb(articles.items, perturbation, False)
+    for i, article in enumerate(articles.items):
+        articles.items[i] = Article(0, article['title'], '').perturb(perturbation)
     return render_template('article_list.html', articles=articles)
 
 @app.route("/article/<title>", subdomain="<perturbation>")
 def article(title, perturbation):
-    article = Article.query.filter_by(title=unquote(title)).first()
+    article = Article.query.filter_by(title=unperturb(unquote(title), perturbation)).first()
     if not article:
         abort(404)
-    perturb(article, perturbation)
+    article.perturb(perturbation)
     return render_template('article.html', article=article)
