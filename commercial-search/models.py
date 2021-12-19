@@ -5,7 +5,7 @@
 # Contains DB models.
 #
 from flask_sqlalchemy import SQLAlchemy
-from perturbations import perturb
+from perturbations import perturb, unperturb
 
 # Initialize db variable to avoid namespace errors
 # ('db' must be imported by application later)
@@ -30,3 +30,7 @@ class Article(db.Model):
         self.title = perturb_words(self.title)
         self.text = perturb_words(self.text)
         return self
+    
+    @classmethod
+    def unperturb(cls, input: str, perturbation: str) -> str:
+        return ' '.join(map(lambda w: unperturb(w, perturbation), input.split(' ')))

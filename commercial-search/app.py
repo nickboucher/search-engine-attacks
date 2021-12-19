@@ -10,7 +10,7 @@ from urllib.parse import unquote
 from typing import List
 from models import db, Article
 from cli import load_db
-from perturbations import perturbations, unperturb
+from perturbations import perturbations
 
 app = Flask(__name__)
 for key, val in dotenv_values().items():
@@ -35,7 +35,7 @@ def article_list(perturbation, page=1):
 
 @app.route("/article/<title>", subdomain="<perturbation>")
 def article(title, perturbation):
-    article = Article.query.filter_by(title=unperturb(unquote(title), perturbation)).first()
+    article = Article.query.filter_by(title=Article.unperturb(unquote(title), perturbation)).first()
     if not article:
         abort(404)
     article.perturb(perturbation)
