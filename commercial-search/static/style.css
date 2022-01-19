@@ -1,5 +1,16 @@
+/* noto-sans-regular - vietnamese_latin-ext_latin_greek-ext_greek_devanagari_cyrillic-ext_cyrillic */
+@font-face {
+    font-family: 'Noto Sans';
+    font-style: normal;
+    font-weight: 400;
+    src: local(''),
+         url('/static/fonts/noto.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+         url('/static/fonts/noto.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+  }
+
 body {
     background-color: #f6f6f6;
+    font-family: 'Noto Sans';
 }
 
 h1 {
