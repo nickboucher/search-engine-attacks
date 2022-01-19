@@ -4,13 +4,21 @@
     font-style: normal;
     font-weight: 400;
     src: local(''),
-         url('/static/noto.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-         url('/static/noto.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+         url('/static/fonts/noto.woff2') format('woff2'),
+         url('/static/fonts/noto.woff') format('woff');
+  }
+
+@font-face {
+    font-family: 'Unifont';
+    font-style: normal;
+    font-weight: 400;
+    src: local(''),
+         url('/static/fonts/unifont.woff') format('woff');
   }
 
 body {
     background-color: #f6f6f6;
-    font-family: 'Noto Sans';
+    font-family: 'Noto Sans', 'Unifont';
 }
 
 h1 {
