@@ -40,4 +40,4 @@ jobs:
           host: ${{ secrets.DEPLOY_HOST }}
           username: ${{ secrets.DEPLOY_USER }}
           key: ${{ secrets.DEPLOY_RSA }}
-          script: flask gen-sitemaps; sudo systemctl restart badsearch
+          script: conda activate badsearch && flask gen-sitemaps; sudo systemctl restart badsearch

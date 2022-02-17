@@ -108,6 +108,7 @@ def load_db():
 @click.command('gen-sitemaps')
 @with_appcontext
 def gen_sitemaps():
+    print("Building sitemaps...")
     sitemaps = 'static/sitemaps'
     server = dotenv_values()["SERVER_NAME"]
     rmtree(sitemaps, ignore_errors=True)
@@ -125,3 +126,8 @@ def gen_sitemaps():
         makedirs(path, exist_ok=True)
         with XMLSitemap(path=path, root_url=f'https://{perturbation}.{server}') as sitemap:
             sitemap.add_urls(get_urls())
+        with open(f'{path}/sitemap.xml', 'r') as f:
+            sitemap = f.read()
+        with open(f'{path}/sitemap.xml', 'w') as f:
+            f.write(sitemap.replace(f'https://{perturbation}.{server}', f'https://{perturbation}.{server}/sitemaps'))   
+    print("Sitemap building complete.")

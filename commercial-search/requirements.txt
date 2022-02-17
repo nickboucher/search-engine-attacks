@@ -7,3 +7,4 @@ flask_sqlalchemy
 python-dotenv
 click
 tqdm
+xml-sitemap-writer
