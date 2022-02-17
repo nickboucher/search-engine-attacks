@@ -48,12 +48,10 @@ def robots(perturbation=None):
 
 @app.route('/sitemap.xml')
 @app.route('/sitemap.xml', subdomain="<perturbation>")
-def sitemap(perturbation=None):
-    subdir = f'/{perturbation.strip("./")}' if perturbation else ''
-    return send_from_directory(f'static/sitemaps{subdir}/sitemap.xml')
+def sitemap(perturbation=''):
+    return send_from_directory('static/sitemaps', perturbation, 'sitemap.xml')
 
 @app.route('/sitemaps/<sitemap>')
 @app.route('/sitemaps/<sitemap>', subdomain="<perturbation>")
-def sitemaps(sitemap, perturbation=None):
-    subdir = f'/{perturbation.strip("./")}' if perturbation else ''
-    return send_from_directory(f'static/sitemaps{subdir}/{sitemap.strip("./")}')
+def sitemaps(sitemap, perturbation=''):
+    return send_from_directory('static/sitemaps', perturbation, sitemap)

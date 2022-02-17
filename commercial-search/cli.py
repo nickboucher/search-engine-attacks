@@ -116,7 +116,7 @@ def gen_sitemaps():
     with open(f'{sitemaps}/sitemap.xml', 'w') as f:
         f.write('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n')
         for perturbation in perturbations:
-            f.write(f'<url><loc>https://{perturbation}.{server}</loc></url>\n')
+            f.write(f'        <url><loc>https://{perturbation}.{server}</loc></url>\n')
         f.write('</urlset>\n')
     for perturbation in perturbations:
         def get_urls() -> Iterator[str]:
