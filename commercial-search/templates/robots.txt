@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://{{ f'{perturbation}.' if perturbation else '' }}{{ config.SERVER_NAME }}/sitemap.xml

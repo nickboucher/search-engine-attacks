@@ -4,6 +4,7 @@
 # Nicholas Boucher - December 2021
 # Downloads SimpleWikipedia dump and loads into SQL DB.
 #
+from typing import Iterator
 import click
 from flask.cli import with_appcontext
 from urllib.request import urlopen
@@ -17,6 +18,12 @@ from tqdm import tqdm
 from models import Article
 from constants import SIMPLE_WIKI_URL, TMP_FILE
 from app import db
+from xml_sitemap_writer import XMLSitemap
+from perturbations import perturb, perturbations
+from urllib.parse import quote
+from dotenv import dotenv_values
+from os import makedirs
+from shutil import rmtree
 
 def dewiki(text):
     text = wtp.parse(text).plain_text()  # wiki to plaintext 
@@ -97,3 +104,24 @@ def load_db():
 
     # Confirm success
     print(f'Successfully built Simple Wikipedia database.')
+
+@click.command('gen-sitemaps')
+@with_appcontext
+def gen_sitemaps():
+    sitemaps = 'static/sitemaps'
+    server = dotenv_values()["SERVER_NAME"]
+    rmtree(sitemaps, ignore_errors=True)
+    makedirs(sitemaps)
+    with open(f'{sitemaps}/sitemap.xml', 'w') as f:
+        f.write('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n')
+        for perturbation in perturbations:
+            f.write(f'<url><loc>https://{perturbation}.{server}</loc></url>\n')
+        f.write('</urlset>\n')
+    for perturbation in perturbations:
+        def get_urls() -> Iterator[str]:
+            for article in db.session.query(Article.title).yield_per(1000):
+                yield f'/article/{quote(perturb(article["title"], perturbation))}'
+        path = f'{sitemaps}/{perturbation}'
+        makedirs(path, exist_ok=True)
+        with XMLSitemap(path=path, root_url=f'https://{perturbation}.{server}') as sitemap:
+            sitemap.add_urls(get_urls())

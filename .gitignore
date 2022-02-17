@@ -137,3 +137,6 @@ commercial-search/SimpleWiki/
 
 # Databases
 *.db
+
+# Sitemap files
+sitemaps/

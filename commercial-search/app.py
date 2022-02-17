@@ -4,12 +4,11 @@
 # Nicholas Boucher - December 2021
 # Flask server app for SimpleWiki clone.
 #
-from flask import Flask, render_template, request, abort
+from flask import Flask, render_template, request, abort, send_from_directory
 from dotenv import dotenv_values
 from urllib.parse import unquote
-from typing import List
 from models import db, Article
-from cli import load_db
+from cli import load_db, gen_sitemaps
 from perturbations import perturbations
 
 app = Flask(__name__)
@@ -17,6 +16,7 @@ for key, val in dotenv_values().items():
     app.config[key] = val
 db.init_app(app)
 app.cli.add_command(load_db)
+app.cli.add_command(gen_sitemaps)
 
 @app.route("/")
 def subdomain_list():
@@ -40,3 +40,14 @@ def article(title, perturbation):
         abort(404)
     article.perturb(perturbation)
     return render_template('article.html', article=article)
+
+@app.route('/robots.txt')
+@app.route('/robots.txt', subdomain="<perturbation>")
+def robots(perturbation=None):
+    return render_template('robots.txt', perturbation=perturbation)
+
+@app.route('/sitemap.xml')
+@app.route('/sitemap.xml', subdomain="<perturbation>")
+def sitemaps(perturbation=None):
+    subdir = f'/{perturbation.strip("./")}' if perturbation else ''
+    return send_from_directory(f'static/sitemaps{subdir}/sitemap.xml')
