@@ -4,7 +4,7 @@
 # Nicholas Boucher - December 2021
 # Flask server app for SimpleWiki clone.
 #
-from flask import Flask, render_template, request, abort, send_from_directory
+from flask import Flask, render_template, request, abort, send_from_directory, Response
 from dotenv import dotenv_values
 from urllib.parse import unquote
 from models import db, Article
@@ -44,7 +44,8 @@ def article(title, perturbation):
 @app.route('/robots.txt')
 @app.route('/robots.txt', subdomain="<perturbation>")
 def robots(perturbation=None):
-    return render_template('robots.txt', perturbation=perturbation)
+    subdomain = f'{perturbation}.' if perturbation else ''
+    return Response(f'User-agent: *\nAllow: /\nSitemap: https://{subdomain}{app.config["SERVER_NAME"]}/sitemap.xml', mimetype='text/plain')
 
 @app.route('/sitemap.xml')
 @app.route('/sitemap.xml', subdomain="<perturbation>")
