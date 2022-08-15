@@ -4,16 +4,17 @@
 # Nicholas Boucher - December 2021
 # Downloads SimpleWikipedia dump and loads into SQL DB.
 #
-from typing import Iterator
 import click
+import wikitextparser as wtp
+from typing import Iterator
 from flask.cli import with_appcontext
+from flask import render_template
 from urllib.request import urlopen
 from shutil import copyfileobj
-from os import remove
+from os import remove, makedirs
 from bz2 import decompress
 from re import sub
 from html2text import html2text as htt
-import wikitextparser as wtp
 from tqdm import tqdm
 from models import Article
 from constants import SIMPLE_WIKI_URL, TMP_FILE
@@ -23,7 +24,9 @@ from perturbations import perturb, perturbations
 from urllib.parse import quote
 from dotenv import dotenv_values
 from os import makedirs
-from shutil import rmtree
+from shutil import rmtree, copytree
+from sqlalchemy.sql import func
+from datetime import datetime
 
 def dewiki(text):
     text = wtp.parse(text).plain_text()  # wiki to plaintext 
@@ -131,3 +134,26 @@ def gen_sitemaps():
         with open(f'{path}/sitemap.xml', 'w') as f:
             f.write(sitemap.replace(f'https://{perturbation}.{server}', f'https://{perturbation}.{server}/sitemaps'))   
     print("Sitemap building complete.")
+
+
+@click.command("gen-static")
+@click.argument("pages", type=int, default=100)
+@with_appcontext
+def gen_static(pages):
+    """Generate static pages for each perturbation."""
+    articles = list(Article.query.filter(~Article.title.contains('/')).order_by(func.random()).limit(pages))
+    rmtree('public_html/')
+    for perturbation in perturbations:
+        makedirs(f'public_html/{perturbation}', exist_ok=True)
+        for index, article in enumerate(articles):
+            perturbed = article.clone().perturb(perturbation)
+            with open(f'public_html/{perturbation}/{index}.html', 'w') as f:
+                f.write(render_template('article.html', article=perturbed))
+    with open('public_html/index.html', 'w') as f:
+        f.write(render_template('flat_article_list.html', articles=articles, perturbations=perturbations,))
+    with open('public_html/sitemap.xml', 'w') as f:
+        f.write(render_template('sitemap.xml', articles=articles, perturbations=perturbations, server=dotenv_values()["SERVER_NAME"], now=datetime.now()))
+    with open('public_html/robots.txt', 'w') as f:
+        f.write(render_template('robots.txt', server=dotenv_values()["SERVER_NAME"]))
+    copytree('static', 'public_html/static')
+    print("Static pages generated.")

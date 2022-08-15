@@ -140,3 +140,6 @@ commercial-search/SimpleWiki/
 
 # Sitemap files
 sitemaps/
+
+# Static Site Output
+commercial-search/public_html/

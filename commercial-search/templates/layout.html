@@ -11,14 +11,14 @@
         <link rel="manifest" href="/static/site.webmanifest">
         <link rel="mask-icon" href="/static/safari-pinned-tab.svg" color="#00a300">
         <link rel="shortcut icon" href="/static/favicon.ico">
-        <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+        <link rel=stylesheet type=text/css href="/static/style.css">
 
         <title>Bad Search Wiki</title>
         <meta name="description" content="Experimental SimpleWiki with various text perturbations applied.">
         
     </head>
     <body>
-        <div class="sidebar"><a href="/"><img src="{{ url_for('static', filename='logo.png') }}" class="logo"></a></div>
+        <div class="sidebar"><a href="/"><img src="/static/logo.png" class="logo"></a></div>
         <div class="content">
             {% block content %}{% endblock %}
         </div>

@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h1>Articles</h1>
+
+<table>
+    <thead>
+        <tr>
+        {% for perturbation in perturbations %}
+            <th>{{perturbation}}</th>
+        {% endfor %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for article in articles %}
+            <tr>
+            {% set index = loop.index0 %}
+            {% for perturbation in perturbations %}
+                {% set perturbed = article.clone().perturb(perturbation) %}
+                <td><a href="/{{perturbation}}/{{index}}.html" target="_self">{{perturbed.title}}</href></td>
+            {% endfor %}
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

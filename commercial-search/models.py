@@ -30,6 +30,9 @@ class Article(db.Model):
         self.title = perturb_words(self.title)
         self.text = perturb_words(self.text)
         return self
+
+    def clone(self) -> 'Article':
+        return Article(self.id, self.title, self.text)
     
     @classmethod
     def unperturb(cls, input: str, perturbation: str) -> str:

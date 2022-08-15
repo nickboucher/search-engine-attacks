@@ -8,7 +8,7 @@ from flask import Flask, render_template, request, abort, send_from_directory, R
 from dotenv import dotenv_values
 from urllib.parse import unquote
 from models import db, Article
-from cli import load_db, gen_sitemaps
+from cli import load_db, gen_sitemaps, gen_static
 from perturbations import perturbations
 
 app = Flask(__name__)
@@ -17,6 +17,7 @@ for key, val in dotenv_values().items():
 db.init_app(app)
 app.cli.add_command(load_db)
 app.cli.add_command(gen_sitemaps)
+app.cli.add_command(gen_static)
 
 @app.route("/")
 def subdomain_list():

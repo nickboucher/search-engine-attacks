@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+{%- for perturbation in perturbations -%}
+    {% for article in articles %}
+    <url>
+        <loc>https://{{server}}/{{perturbation}}/{{loop.index0}}.html</loc>
+        <lastmod>{{now.strftime('%Y-%m-%d')}}</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>1</priority>
+    </url>
+    {%- endfor -%}
+{% endfor %}
+</urlset> 
