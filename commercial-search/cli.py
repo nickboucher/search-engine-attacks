@@ -20,7 +20,7 @@ from models import Article
 from constants import SIMPLE_WIKI_URL, TMP_FILE
 from app import db
 from xml_sitemap_writer import XMLSitemap
-from perturbations import perturb, perturbations
+from perturbations import perturb, perturbations, zwsp2, homo2
 from urllib.parse import quote
 from dotenv import dotenv_values
 from os import makedirs
@@ -157,3 +157,25 @@ def gen_static(pages):
         f.write(render_template('robots.txt', server=dotenv_values()["SERVER_NAME"]))
     copytree('static', 'public_html/static')
     print("Static pages generated.")
+
+@click.command("gen2-static")
+@click.argument("pages", type=int, default=5)
+@with_appcontext
+def gen2_static(pages):
+    """ Generates static pages for the second generation experiments."""
+    perturbations = ['zwsp2', 'homo2']
+    articles = ['Hans Zender', 'Great Bentley', 'Jerrier A. Haddad', 'IPhone 5C', 'Shelley, Idaho', 'A Day in the Life', 'George Polk Awards', 'Helen Herron Taft', 'Gilles Latulippe', 'Kitty Hawk, North Carolina', 'Charlotte Rae', 'Vaudes', 'Battleship Potemkin', 'Oak Park, Illinois', 'Plouégat-Guérand', 'Leah Clark', 'Free market', 'Cullowhee, North Carolina', 'Herat', 'Seaca de Câmp', 'Oro y plata', 'Jerry Mathers', 'Greg Papa', 'Duško Popov', 'Sacheen Littlefeather', 'Daydreaming (song)', 'Sverigetopplistan', 'The Godfather Part II', 'Emerson, Lake and Powell', 'Paranthropus aethiopicus', 'Didí Torrico', 'Swan', 'Christine Keeler', 'Samir Farid', 'Canonical form', 'Christina Hendricks', 'Little India MRT station', 'Tracie Spencer', 'Luc-Adolphe Tiao', 'Christopher A. Wray', 'Nezapir', 'Yoram Globus', 'Joseph D. Pistone', 'Datsakorn Thonglao', 'COVID-19 pandemic in Missouri', 'Alan Shearer', 'Shanghai World Financial Center', 'Adam Deadmarsh', '65th British Academy Film Awards', 'Members Church of God International', 'Winter solstice', 'The Family Jewels (movie)', 'Gurtnellen', 'Soriano Department', '119 Tauri', 'Adelaide Kane', 'Frances Farenthold', 'Praça Diogo de Vasconcelos', 'Centennial Olympic Park bombing', 'La Pommeraie-sur-Sèvre', 'Mycoplasma genitalium', 'Dozwil', 'Leeds Cathedral', 'Cuts Both Ways', 'Chisago Lakes', 'Aberaeron', 'Enhanced Fujita scale', 'Cappy, Somme', 'King George V DLR station', 'Claw', 'Cremona', 'Insurance (constituency)', 'Waqar Ahmad Shah', 'Ed Westcott', 'Cerebellum', '1st century BC', 'Mateur', 'Gary Staples', 'List of A2 roads', 'Naked eye', 'Odra', 'Ross Ardern', 'Twist (dance)', '2019 NASCAR Xfinity Series', 'In-N-Out Burger', 'Selous&#39; zebra', 'Hillary Clinton', 'Jussy, Aisne', 'Provinces of Oman', 'Source code', 'Vätterstads IK', 'The Illustrated World of Mortal Engines', 'First Sino-Japanese War', 'Sainte-Suzanne-et-Chammes', 'Joël Bouchard', 'Dado Cavalcanti', 'Lucky Pulpit', 'Monte Plata Province', 'Glovelier', 'Cape Breton Island']
+    articles = articles[:pages]
+    for perturbation in perturbations:
+        rmtree(f'public_html/{perturbation}', ignore_errors=True)
+        makedirs(f'public_html/{perturbation}')
+    for idx, title in enumerate(articles):
+        article = Article.query.filter(Article.title == title).first()
+        for perturbation in perturbations:
+            perturbed = article.clone().perturb(perturbation)
+            with open(f'public_html/{perturbation}/{idx}.html', 'w') as f:
+                f.write(render_template('article.html', article=perturbed))
+    with open('public_html/gen2_sitemap.xml', 'w') as f:
+        f.write(render_template('sitemap.xml', articles=articles, perturbations=perturbations, server=dotenv_values()["SERVER_NAME"], now=datetime.now()))    
+    print("Static pages generated.")
+        

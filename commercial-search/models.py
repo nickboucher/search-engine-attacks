@@ -26,9 +26,9 @@ class Article(db.Model):
 
     def perturb(self, perturbation: str):
         def perturb_words(input: str) -> str:
-            return ' '.join(map(lambda w: perturb(w, perturbation), input.split(' ')))
-        self.title = perturb_words(self.title)
+            return ' '.join(map(lambda w: perturb(w, perturbation, title=self.title), input.split(' ')))
         self.text = perturb_words(self.text)
+        self.title = perturb_words(self.title)
         return self
 
     def clone(self) -> 'Article':
