@@ -20,7 +20,7 @@ from models import Article
 from constants import SIMPLE_WIKI_URL, TMP_FILE
 from app import db
 from xml_sitemap_writer import XMLSitemap
-from perturbations import perturb, perturbations, zwsp2, homo2
+from perturbations import perturb, perturbations
 from urllib.parse import quote
 from dotenv import dotenv_values
 from os import makedirs
