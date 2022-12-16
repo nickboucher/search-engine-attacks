@@ -1,3 +1,4 @@
-# Babel
+# Boosting Big Brother
+*Attacking Search Engines with Encodings*
 
-Adversarial search engine reseach using Unicode.
+Please see paper for details.
