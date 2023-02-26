@@ -132,9 +132,6 @@ dmypy.json
 *.code-workspace
 .vscode/
 
-# Ignored directories
-commercial-search/SimpleWiki/
-
 # Databases
 *.db
 
@@ -142,4 +139,4 @@ commercial-search/SimpleWiki/
 sitemaps/
 
 # Static Site Output
-commercial-search/public_html/
+bad-search-wiki/public_html/
