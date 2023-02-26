@@ -30,7 +30,7 @@ jobs:
           SSH_PRIVATE_KEY: ${{ secrets.DEPLOY_RSA }}
           REMOTE_HOST: ${{ secrets.DEPLOY_HOST }}
           REMOTE_USER: ${{ secrets.DEPLOY_USER }}
-          SOURCE: commercial-search/
+          SOURCE: bad-search-wiki/
           TARGET: ${{ secrets.DEPLOY_DIR }}
           ARGS: -azv --delete --omit-dir-times --no-perms --exclude '.htaccess' --exclude '*.log' --exclude 'run.sh' --exclude '*.db' --exclude '*.sock' --exclude '.env' --exclude '__pycache__'
           
