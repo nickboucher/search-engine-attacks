@@ -140,3 +140,6 @@ sitemaps/
 
 # Static Site Output
 bad-search-wiki/public_html/
+
+# Large elastic search results
+elastic-search/results/
