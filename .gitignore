@@ -140,6 +140,3 @@ sitemaps/
 
 # Static Site Output
 bad-search-wiki/public_html/
-
-# Pickle Files
-*.pkl
