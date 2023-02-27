@@ -48,8 +48,8 @@ def hiding_graphs(pickle_file):
     top_bars = ax.bar(x, y1, label='Perturbed Target Present in SERP', color='lightseagreen', bottom=y2)
     bottom_bars = ax.bar(x, y2, label='Perturbed Target Absent in SERP', color='tomato')
     ax.set_ylim([0,110])
-    ax.legend(loc='lower center', bbox_to_anchor=(.5,-.4))
-    ax.set_title('Google:\nPerturbed Index & Unperturbed Queries', fontsize=16, y=1.1)
+    ax.legend(loc='lower center', bbox_to_anchor=(.5,-.31))
+    ax.set_title('Google:\nPerturbed Index & Unperturbed Queries', fontsize=16, y=1.06)
     ax.set_xlabel('Perturbation Technique')
     ax.set_ylabel('Number of Indexed Pages')
     for top_bar, bottom_bar in zip(top_bars, bottom_bars):
@@ -60,7 +60,7 @@ def hiding_graphs(pickle_file):
                     textcoords="offset points",
                     ha='center', va='bottom')
 
-    plt.savefig('google_hiding.svg')
+    plt.savefig('google_hiding.svg', bbox_inches='tight')
     plt.savefig('google_hiding.png', bbox_inches='tight')
     print('Hiding bar chart saved to google_hiding.[svg/png].')
 
@@ -93,9 +93,9 @@ def surfacing_graphs(pickle_file):
         axs[idx//4,idx%4].pie([pct,1-pct], autopct='%1.0f%%', colors=['lightseagreen', 'tomato'])
         axs[idx//4,idx%4].set_title(technique)
 
-    plt.legend(['Perturbed Target Present in SERP','Perturbed Target Absent in SERP'], loc='lower center', bbox_to_anchor=(-1.32,-1.59))
-    fig.suptitle("Google:\nPerturbed Result from Perturbed Query", fontsize=16, y=1.075)
+    plt.legend(['Perturbed Target Present in SERP','Perturbed Target Absent in SERP'], loc='lower center', bbox_to_anchor=(-1.32,-1.25))
+    fig.suptitle("Google:\nPerturbed Result from Perturbed Query", fontsize=16, y=1.05)
 
-    plt.savefig('google_surfacing.svg')
+    plt.savefig('google_surfacing.svg', bbox_inches='tight')
     plt.savefig('google_surfacing.png', bbox_inches='tight')
     print('Surfacing pie charts saved to google_surfacing.[svg/png].')
