@@ -1,0 +1,6 @@
+# requirements.txt
+# Install via `pip3 install -r requirements.txt`
+tqdm
+homoglyphs
+requests
+matplotlib
