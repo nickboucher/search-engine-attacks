@@ -41,9 +41,9 @@ def experiment(table, key_file, experiment_name):
             if (len(url) == 5):
                 google_indexed.append((url[-2], int(url[-1].split('.')[0])))
     match experiment_name:
-        case 'hiding': hiding_experiment(google_indexed, key)
-        case 'surfacing': surfacing_experiment(google_indexed, key)
-        case 'all': hiding_experiment(google_indexed, key); surfacing_experiment(google_indexed, key)
+        case 'hiding': hiding_experiment(google_indexed)
+        case 'surfacing': surfacing_experiment(google_indexed)
+        case 'all': hiding_experiment(google_indexed); surfacing_experiment(google_indexed)
         case _ : raise ValueError(f'Unknown experiment: {experiment_name}')
 
 def hiding_experiment(google_indexed):
@@ -82,7 +82,7 @@ def hiding_experiment(google_indexed):
     write_pickle(filename, serps)
     print(f'Hiding experiment complete. Results written to {filename}.')
 
-def surfacing_experiment(google_indexed, key):
+def surfacing_experiment(google_indexed):
     filename = f'google_serps_surfacing-{datetime.now().strftime("%Y-%m-%d")}.pkl'
     if exists(filename):
         print('Loading previous results from file to continue experiment...')
