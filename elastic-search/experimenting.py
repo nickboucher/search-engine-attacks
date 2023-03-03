@@ -6,7 +6,7 @@
 # Utilities for searching experimental queries against perturbed
 # Simple Wikipedia. Should be called from the command line using elastic.py.
 #
-import pickle
+import json
 from tqdm.auto import tqdm
 from datetime import datetime
 from os.path import exists
@@ -21,11 +21,11 @@ def experiment(elastic, experiment_name):
 
 def hiding_experiment(elastic):
     # Run Hiding Experiment
-    filename = f'elastic_serps_hiding-{datetime.now().strftime("%Y-%m-%d")}.pkl'
+    filename = f'elastic_serps_hiding-{datetime.now().strftime("%Y-%m-%d")}.json'
     if exists(filename):
         print('Loading previous results from file to continue experiment...')
         with open(filename, 'rb') as f:
-            serps = pickle.load(f)['serps']
+            serps = json.load(f)['serps']
     else:
         serps = []
     skip = len(serps)
@@ -60,25 +60,25 @@ def hiding_experiment(elastic):
 
         # Write results to file every 5% of the way through
         if i % write_interval == 0:
-            write_pickle(filename, serps)
+            write_json(filename, serps)
 
     # Write final results to file
-    write_pickle(filename, serps)
+    write_json(filename, serps)
     print(f'Hiding experiment complete. Results written to {filename}.')
 
 
 def surfacing_experiment(elastic):
     # Run Showing Experiment
-    filename = f'elastic_serps_surfacing-{datetime.now().strftime("%Y-%m-%d")}.pkl'
+    filename = f'elastic_serps_surfacing-{datetime.now().strftime("%Y-%m-%d")}.json'
     if exists(filename):
         print('Loading previous results from file to continue experiment...')
         with open(filename, 'rb') as f:
-            serps = pickle.load(f)['serps']
+            serps = json.load(f)['serps']
     else:
         serps = []
     skip = len(serps)
     serps = []
-    filename = f'elastic_serps_surfacing-2-{datetime.now().strftime("%Y-%m-%d")}.pkl'
+    filename = f'elastic_serps_surfacing-2-{datetime.now().strftime("%Y-%m-%d")}.json'
     count = elastic.count(index='_all', query={ "match_all": {} })['count']
     write_interval = count // 20 # Write every 5% of the way through
 
@@ -110,10 +110,10 @@ def surfacing_experiment(elastic):
 
         # Write results to file every 5% of the way through
         if i % write_interval == 0:
-            write_pickle(filename, serps)
+            write_json(filename, serps)
 
     # Write final results to file
-    write_pickle(filename, serps)
+    write_json(filename, serps)
     print(f'Surfacing experiment complete. Results written to {filename}.')
 
 def all_docs(elastic, index, pagesize=1000, scroll_timeout="30m", **kwargs):
@@ -143,8 +143,8 @@ def all_docs(elastic, index, pagesize=1000, scroll_timeout="30m", **kwargs):
         # Yield each entry
         yield from (hit for hit in hits)
 
-def write_pickle(filename, serps):
+def write_json(filename, serps):
     with open(filename, 'wb') as f:
-        pickle.dump({
+        json.dump({
             'serps': serps
         }, f)

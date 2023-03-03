@@ -35,22 +35,23 @@ def main():
     # Graphs Parser
     graphs_parser = subparsers.add_parser('graphs', help='Build Graphs for Experimental Results', description='Build Graphs for Experimental Results')
     graphs_parser.add_argument('experiment_name', help='Experimental Graphs to Build. Either "hiding", "surfacing", or "all".')
-    graphs_parser.add_argument('pickle_file', help='Pickle file of experimental results for building graphs.')
+    graphs_parser.add_argument('json_file', help='JSON file of experimental results for building graphs.')
     
     # Parse arguments
     args = parser.parse_args()
 
     # Connect to Elasticsearch
-    elastic = Elasticsearch([{'host': args.host, 'port': args.port, 'scheme': args.scheme}], request_timeout=30, max_retries=10, retry_on_timeout=True)
-    if not elastic.ping():
-        exit('Elasticsearch not running. Please start Elasticsearch and try again.')
+    if args.command != 'graphs':
+        elastic = Elasticsearch([{'host': args.host, 'port': args.port, 'scheme': args.scheme}], request_timeout=30, max_retries=10, retry_on_timeout=True)
+        if not elastic.ping():
+            exit('Elasticsearch not running. Please start Elasticsearch and try again.')
 
     # Invoke function to handle verb
     match args.command:
         case 'index' : index(elastic)
         case 'search': search(elastic, args.query)
         case 'experiment': experiment(elastic, args.experiment_name)
-        case 'graphs': graphs(args.experiment_name, args.pickle_file)
+        case 'graphs': graphs(args.experiment_name, args.json_file)
         case _ : raise ValueError(f'Unknown verb: {args.command}')
 
 if __name__ == '__main__':
