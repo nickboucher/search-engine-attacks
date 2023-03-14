@@ -43,8 +43,8 @@ def hiding_graphs(json_file):
 
     plt.style.use('ggplot')
     _, ax = plt.subplots()
-    top_bars = ax.bar(x, y1, label='Perturbed Target Present in SERP', color='lightseagreen', bottom=y2)
-    bottom_bars = ax.bar(x, y2, label='Perturbed Target Absent in SERP', color='tomato')
+    top_bars = ax.bar(x, y1, label='Perturbed Target Present in SERP', color='tomato', bottom=y2)
+    bottom_bars = ax.bar(x, y2, label='Perturbed Target Absent in SERP', color='lightseagreen')
     ax.set_ylim([0,249000])
     ax.legend(loc='lower center', bbox_to_anchor=(.5,-.31))
     ax.set_title('Elasticsearch:\nPerturbed Index & Unperturbed Queries', fontsize=16, y=1.06)
@@ -83,7 +83,7 @@ def surfacing_graphs(json_file):
     fig, axs = plt.subplots(2, 5)
     for idx, technique in enumerate(perturbations):
         pct = count[f'{technique}-hit']/max(count[f'{technique}-hit']+count[f'{technique}-miss'],1)
-        axs[idx//5,idx%5].pie([pct,1-pct], autopct='%1.0f%%', colors=['lightseagreen', 'tomato'])
+        axs[idx//5,idx%5].pie([pct,1-pct], autopct='%1.0f%%', colors=['lightsteelblue', 'lightcoral'])
         axs[idx//5,idx%5].set_title(technique)
     plt.legend(['Perturbed Target Present in SERP','Perturbed Target Absent in SERP'], loc='lower center', bbox_to_anchor=(-1.9,-1.45))
     fig.suptitle("Elasticsearch:\nPerturbed Result from Perturbed Query", fontsize=16, y=1.05)

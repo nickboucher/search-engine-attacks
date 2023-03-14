@@ -69,8 +69,8 @@ def hiding_graphs(srcf_pickle_file: str, ml_pickle_file: str) -> None:
 
     plt.style.use('ggplot')
     _, ax = plt.subplots()
-    top_bars = ax.bar(x, y1, label='Perturbed Target Present in SERP', color='lightseagreen', bottom=y2)
-    bottom_bars = ax.bar(x, y2, label='Perturbed Target Absent in SERP', color='tomato')
+    top_bars = ax.bar(x, y1, label='Perturbed Target Present in SERP', color='tomato', bottom=y2)
+    bottom_bars = ax.bar(x, y2, label='Perturbed Target Absent in SERP', color='lightseagreen')
     ax.set_ylim([0,79])
     ax.legend(loc='lower center', bbox_to_anchor=(.5,-.31))
     ax.set_title('Bing:\nPerturbed Index & Unperturbed Queries', fontsize=16, y=1.06)
@@ -142,7 +142,7 @@ def surfacing_graphs(srcf_pickle_file: str, ml_pickle_file: str) -> None:
     fig, axs = plt.subplots(2, 4)
     for idx, technique in enumerate(['base', 'zwsp', 'zwnj', 'zwj', 'rlo', 'bksp', 'del', 'homo']):
         pct = count[f'{technique}-hit']/max(count[f'{technique}-hit']+count[f'{technique}-miss'],1)
-        axs[idx//4,idx%4].pie([pct,1-pct], autopct='%1.0f%%', colors=['lightseagreen', 'tomato'])
+        axs[idx//4,idx%4].pie([pct,1-pct], autopct='%1.0f%%', colors=['lightsteelblue', 'lightcoral'])
         axs[idx//4,idx%4].set_title(technique)
     plt.legend(['Perturbed Target Present in SERP','Perturbed Target Absent in SERP'], loc='lower center', bbox_to_anchor=(-1.32,-1.32))
     fig.suptitle("Bing:\nPerturbed Result from Perturbed Query", fontsize=16, y=1.05)
