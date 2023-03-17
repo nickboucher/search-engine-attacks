@@ -72,9 +72,9 @@ def surfacing_graphs(json_file):
     for serp in tqdm(serps, desc='Processing SERPs'):
         hit = 'miss'
         o_perturbation = serp['query']['technique']
-        o_title = serp['query']['title']
+        o_article = serp['query']['article']
         for page in serp['result']['hits']['hits']:
-            if page['_source']['title'] == o_title:
+            if page['_source']['title'] == o_article:
                 hit = 'hit'
                 break
         count[f'{o_perturbation}-{hit}'] += 1
