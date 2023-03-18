@@ -18,7 +18,7 @@ def main():
     # Experiment Parser
     experiment_parser = subparsers.add_parser('experiment', help='Run Google Experiments', description='Run Google Experiments')
     experiment_parser.add_argument('experiment_name', help='Experiment to run. Either "hiding", "surfacing", or "all".')
-    # Note: Table should be downloaded using Google Accoun and extracted
+    # Note: Table should be downloaded using Google Account and extracted
     # https://search.google.com/search-console/index/drilldown?resource_id=https%3A%2F%2Fbadsearch.soc.srcf.net%2F&pages=ALL_URLS&sharing_key=lC6RrfPkKJ1LTJcGMRvFyw
     # Go to: Export -> Download CSV
     # This page may be inaccessible to later users. If so, please create a new Programmable Search engine, update the IDs in experimenting.py, and export the new table after indexing.
