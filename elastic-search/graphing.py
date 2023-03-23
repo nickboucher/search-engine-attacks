@@ -85,7 +85,7 @@ def surfacing_graphs(json_file):
         pct = count[f'{technique}-hit']/max(count[f'{technique}-hit']+count[f'{technique}-miss'],1)
         axs[idx//5,idx%5].pie([pct,1-pct], autopct='%1.0f%%', colors=['lightsteelblue', 'lightcoral'])
         axs[idx//5,idx%5].set_title(technique)
-        axs[idx//5,idx%5].text(0,-1.4, '$M_s$='+(f'{pct:.2f}'.lstrip('0').replace('1.00','1').replace('.00','0')), size=8, ha='center')
+        axs[idx//5,idx%5].text(0,-1.4, '$M_s$='+(f'{pct:.2f}'.lstrip('0').replace('1.00','1').replace('.00','0')), size=10, ha='center')
     plt.legend(['Perturbed Target Present in SERP','Perturbed Target Absent in SERP'], loc='lower center', bbox_to_anchor=(-1.9,-1.45))
     fig.suptitle("Elasticsearch:\nPerturbed Result from Perturbed Query", fontsize=16, y=1.05)
 

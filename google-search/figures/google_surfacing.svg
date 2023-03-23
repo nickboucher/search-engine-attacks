@@ -6,7 +6,7 @@
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2023-03-17T13:55:44.718756</dc:date>
+    <dc:date>2023-03-23T17:21:30.837157</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
@@ -232,7 +232,7 @@ z
    </g>
    <g id="text_3">
     <!-- $M_s$=.39 -->
-    <g transform="translate(31.257391 169.907478)scale(0.08 -0.08)">
+    <g transform="translate(27.567391 169.907478)scale(0.1 -0.1)">
      <defs>
       <path id="DejaVuSans-Oblique-4d" d="M 1081 4666 
 L 2028 4666 
@@ -530,7 +530,7 @@ z
    </g>
    <g id="text_7">
     <!-- $M_s$=.45 -->
-    <g transform="translate(124.41913 169.907478)scale(0.08 -0.08)">
+    <g transform="translate(120.72913 169.907478)scale(0.1 -0.1)">
      <use xlink:href="#DejaVuSans-Oblique-4d" transform="translate(0 0.09375)"/>
      <use xlink:href="#DejaVuSans-Oblique-73" transform="translate(86.279297 -16.3125)scale(0.7)"/>
      <use xlink:href="#DejaVuSans-3d" transform="translate(125.483398 0.09375)"/>
@@ -653,7 +653,7 @@ z
    </g>
    <g id="text_11">
     <!-- $M_s$=.45 -->
-    <g transform="translate(217.58087 169.907478)scale(0.08 -0.08)">
+    <g transform="translate(213.89087 169.907478)scale(0.1 -0.1)">
      <use xlink:href="#DejaVuSans-Oblique-4d" transform="translate(0 0.09375)"/>
      <use xlink:href="#DejaVuSans-Oblique-73" transform="translate(86.279297 -16.3125)scale(0.7)"/>
      <use xlink:href="#DejaVuSans-3d" transform="translate(125.483398 0.09375)"/>
@@ -759,7 +759,7 @@ z
    </g>
    <g id="text_15">
     <!-- $M_s$=.34 -->
-    <g transform="translate(310.742609 169.907478)scale(0.08 -0.08)">
+    <g transform="translate(307.052609 169.907478)scale(0.1 -0.1)">
      <use xlink:href="#DejaVuSans-Oblique-4d" transform="translate(0 0.78125)"/>
      <use xlink:href="#DejaVuSans-Oblique-73" transform="translate(86.279297 -15.625)scale(0.7)"/>
      <use xlink:href="#DejaVuSans-3d" transform="translate(125.483398 0.78125)"/>
@@ -896,7 +896,7 @@ z
    </g>
    <g id="text_19">
     <!-- $M_s$=.98 -->
-    <g transform="translate(31.257391 315.059478)scale(0.08 -0.08)">
+    <g transform="translate(27.567391 315.059478)scale(0.1 -0.1)">
      <use xlink:href="#DejaVuSans-Oblique-4d" transform="translate(0 0.78125)"/>
      <use xlink:href="#DejaVuSans-Oblique-73" transform="translate(86.279297 -15.625)scale(0.7)"/>
      <use xlink:href="#DejaVuSans-3d" transform="translate(125.483398 0.78125)"/>
@@ -1037,7 +1037,7 @@ z
    </g>
    <g id="text_23">
     <!-- $M_s$=.20 -->
-    <g transform="translate(124.65913 315.059478)scale(0.08 -0.08)">
+    <g transform="translate(121.02913 315.059478)scale(0.1 -0.1)">
      <use xlink:href="#DejaVuSans-Oblique-4d" transform="translate(0 0.78125)"/>
      <use xlink:href="#DejaVuSans-Oblique-73" transform="translate(86.279297 -15.625)scale(0.7)"/>
      <use xlink:href="#DejaVuSans-3d" transform="translate(125.483398 0.78125)"/>
@@ -1125,7 +1125,7 @@ z
    </g>
    <g id="text_27">
     <!-- $M_s$=.18 -->
-    <g transform="translate(217.58087 315.059478)scale(0.08 -0.08)">
+    <g transform="translate(213.89087 315.059478)scale(0.1 -0.1)">
      <use xlink:href="#DejaVuSans-Oblique-4d" transform="translate(0 0.78125)"/>
      <use xlink:href="#DejaVuSans-Oblique-73" transform="translate(86.279297 -15.625)scale(0.7)"/>
      <use xlink:href="#DejaVuSans-3d" transform="translate(125.483398 0.78125)"/>
@@ -1235,7 +1235,7 @@ z
    </g>
    <g id="text_31">
     <!-- $M_s$=.97 -->
-    <g transform="translate(310.742609 315.059478)scale(0.08 -0.08)">
+    <g transform="translate(307.052609 315.059478)scale(0.1 -0.1)">
      <use xlink:href="#DejaVuSans-Oblique-4d" transform="translate(0 0.78125)"/>
      <use xlink:href="#DejaVuSans-Oblique-73" transform="translate(86.279297 -15.625)scale(0.7)"/>
      <use xlink:href="#DejaVuSans-3d" transform="translate(125.483398 0.78125)"/>

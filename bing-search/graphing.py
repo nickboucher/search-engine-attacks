@@ -144,7 +144,7 @@ def surfacing_graphs(srcf_pickle_file: str, ml_pickle_file: str) -> None:
         pct = count[f'{technique}-hit']/max(count[f'{technique}-hit']+count[f'{technique}-miss'],1)
         axs[idx//4,idx%4].pie([pct,1-pct], autopct='%1.0f%%', colors=['lightsteelblue', 'lightcoral'])
         axs[idx//4,idx%4].set_title(technique)
-        axs[idx//4,idx%4].text(0,-1.4, '$M_s$='+(f'{pct:.2f}'.lstrip('0').replace('1.00','1').replace('.00','0')), size=8, ha='center')
+        axs[idx//4,idx%4].text(0,-1.4, '$M_s$='+(f'{pct:.2f}'.lstrip('0').replace('1.00','1').replace('.00','0')), size=10, ha='center')
     plt.legend(['Perturbed Target Present in SERP','Perturbed Target Absent in SERP'], loc='lower center', bbox_to_anchor=(-1.32,-1.32))
     fig.suptitle("Bing:\nPerturbed Result from Perturbed Query", fontsize=16, y=1.05)
     plt.savefig('bing_surfacing.svg', bbox_inches='tight')
