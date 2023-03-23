@@ -73,7 +73,7 @@ def graphs(json_file: str) -> None:
     ax.bar(x, y, color='dodgerblue')
     ax.set_title('Bing Chatbot:\nCitation Comparison for Perturbed Inputs', fontsize=16, y=1.06)
     ax.set_xlabel('Perturbation Technique')
-    ax.set_ylabel('Disruption Score ($M_d$)')
+    ax.set_ylabel('Disruption Potential ($M_d$)')
 
     plt.savefig('bing-chat_disruption.svg', bbox_inches='tight')
     plt.savefig('bing-chat_disruption.png', bbox_inches='tight')
