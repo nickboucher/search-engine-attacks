@@ -66,7 +66,7 @@ def graphs(json_file: str) -> None:
 
     # Plot disruption scores
     plt.style.use('ggplot')
-    values = list(zip(urls.keys(), [score['disruption']/score['total'] for score in urls.values()]))
+    values = list(zip(urls.keys(), [1-(score['disruption']/score['total']) for score in urls.values()]))
     values.sort(key=lambda x: -x[1])
     x,y = tuple(zip(*values))
     _, ax = plt.subplots()
