@@ -77,7 +77,7 @@ def graphs(json_file: str) -> None:
 
     plt.savefig('bing-chat_disruption.svg', bbox_inches='tight')
     plt.savefig('bing-chat_disruption.png', bbox_inches='tight')
-    print('chrF bar chart saved to bing-chat_disruption.[svg/png].')
+    print('Disruption bar chart saved to bing-chat_disruption.[svg/png].')
 
 if __name__ == '__main__':
     main()
