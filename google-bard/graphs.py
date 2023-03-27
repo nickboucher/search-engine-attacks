@@ -15,6 +15,10 @@ def main():
     # Invoke function to build graphs
     graphs(args.json_file)
 
+def url_set(urls: list[str]) -> set[str]:
+    '''Convert a list of URLs to a set of URLs without the protocol.'''
+    return set(map(lambda url: url.split('://')[1], urls))
+
 def graphs(json_file: str) -> None:
     # Load the pickle file
     with open(json_file, 'r') as f:
@@ -22,7 +26,7 @@ def graphs(json_file: str) -> None:
 
     bases = list(filter(lambda x: x['query']['technique'] == 'base', results))
     bases_text = { base['query']['title']:base['result']['response'] for base in bases }
-    bases_urls = { base['query']['title']:set(base['result']['sources']) for base in bases }
+    bases_urls = { base['query']['title']:url_set(base['result']['sources']) for base in bases }
 
     performance = {}
     urls = {}
@@ -41,7 +45,7 @@ def graphs(json_file: str) -> None:
         performance[technique]['total'] += 1
         performance[technique]['chrf'] += corpus_chrf([base_text], [result_text])
         # Store result URLs
-        result_urls = set(result['result']['sources'])
+        result_urls = url_set(result['result']['sources'])
         intersect = result_urls.intersection(bases_urls[title])
         urls[technique]['total'] += len(result_urls)
         urls[technique]['disruption'] += len(intersect)
