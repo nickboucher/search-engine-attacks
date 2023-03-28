@@ -37,7 +37,7 @@ def graphs(json_file: str) -> None:
         if technique not in performance:
             performance[technique] = { 'chrf': 0, 'total': 0 }
         if technique not in urls:
-            urls[technique] = { 'disruption': 0, 'total': 0, 'count': 0 }
+            urls[technique] = { 'disruption': 0, 'total': 0 }
         # Remove citations from result
         result_text = result['result']['response']
         base_text = bases_text[title]
@@ -49,7 +49,6 @@ def graphs(json_file: str) -> None:
         intersect = result_urls.intersection(bases_urls[title])
         urls[technique]['total'] += len(result_urls)
         urls[technique]['disruption'] += len(intersect)
-        urls[technique]['count'] += 1
 
     # Plot CHRF scores
     plt.style.use('ggplot')
@@ -74,13 +73,7 @@ def graphs(json_file: str) -> None:
     x,y = tuple(zip(*values))
     _, ax = plt.subplots()
     ax.set_ylim([0,1.1])
-    bars = ax.bar(x, y, color='dodgerblue')
-    for technique, bar in zip(x, bars):
-        ax.annotate('$\\bar{{c}}$=' + '{:.2f}'.format(urls[technique]['total']/urls[technique]['count']),
-                    xy=(bar.get_x() + bar.get_width() / 2, bar.get_height()),
-                    xytext=(0, 3), # 3 points vertical offset
-                    textcoords="offset points",
-                    ha='center', va='bottom')
+    ax.bar(x, y, color='dodgerblue')
     ax.set_title('Google Bard Chatbot:\nCitation Comparison for Perturbed Inputs', fontsize=16, y=1.06)
     ax.set_xlabel('Perturbation Technique')
     ax.set_ylabel('Disruption Potential ($M_d$)')
