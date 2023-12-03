@@ -60,7 +60,8 @@ def hiding_graphs(json_file):
 
     plt.savefig('elastic_hiding.svg', bbox_inches='tight')
     plt.savefig('elastic_hiding.png', bbox_inches='tight')
-    print('Hiding bar chart saved to elastic_hiding.[svg/png].')
+    plt.savefig('elastic_hiding.pdf', bbox_inches='tight')
+    print('Hiding bar chart saved to elastic_hiding.[svg/png/pdf].')
 
 def surfacing_graphs(json_file):
     # Load the pickle file
@@ -91,4 +92,5 @@ def surfacing_graphs(json_file):
 
     plt.savefig('elastic_surfacing.svg', bbox_inches='tight')
     plt.savefig('elastic_surfacing.png', bbox_inches='tight')
-    print('Surfacing pie charts saved to elastic_surfacing.[svg/png].')
+    plt.savefig('elastic_surfacing.pdf', bbox_inches='tight')
+    print('Surfacing pie charts saved to elastic_surfacing.[svg/png/pdf].')

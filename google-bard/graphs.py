@@ -63,7 +63,8 @@ def graphs(json_file: str) -> None:
 
     plt.savefig('google-bard_chrf.svg', bbox_inches='tight')
     plt.savefig('google-bard_chrf.png', bbox_inches='tight')
-    print('chrF bar chart saved to google-bard_chrf.[svg/png].')
+    plt.savefig('google-bard_chrf.pdf', bbox_inches='tight')
+    print('chrF bar chart saved to google-bard_chrf.[svg/png/pdf].')
 
     # Plot disruption scores
     nonzero_urls = { technique:score for technique, score in urls.items() if score['total'] > 0 }
@@ -80,7 +81,8 @@ def graphs(json_file: str) -> None:
 
     plt.savefig('google-bard_disruption.svg', bbox_inches='tight')
     plt.savefig('google-bard_disruption.png', bbox_inches='tight')
-    print('Disruption bar chart saved to bing-chat_disruption.[svg/png].')
+    plt.savefig('google-bard_disruption.pdf', bbox_inches='tight')
+    print('Disruption bar chart saved to bing-chat_disruption.[svg/png/pdf].')
 
 if __name__ == '__main__':
     main()

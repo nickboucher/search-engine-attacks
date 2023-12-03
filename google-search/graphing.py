@@ -62,7 +62,8 @@ def hiding_graphs(pickle_file):
 
     plt.savefig('google_hiding.svg', bbox_inches='tight')
     plt.savefig('google_hiding.png', bbox_inches='tight')
-    print('Hiding bar chart saved to google_hiding.[svg/png].')
+    plt.savefig('google_hiding.pdf', bbox_inches='tight')
+    print('Hiding bar chart saved to google_hiding.[svg/png/pdf].')
 
 def surfacing_graphs(pickle_file):
     # Load the pickle file
@@ -99,4 +100,5 @@ def surfacing_graphs(pickle_file):
 
     plt.savefig('google_surfacing.svg', bbox_inches='tight')
     plt.savefig('google_surfacing.png', bbox_inches='tight')
-    print('Surfacing pie charts saved to google_surfacing.[svg/png].')
+    plt.savefig('google_surfacing.pdf', bbox_inches='tight')
+    print('Surfacing pie charts saved to google_surfacing.[svg/png/pdf].')

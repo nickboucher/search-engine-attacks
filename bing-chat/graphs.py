@@ -62,7 +62,8 @@ def graphs(json_file: str) -> None:
 
     plt.savefig('bing-chat_chrf.svg', bbox_inches='tight')
     plt.savefig('bing-chat_chrf.png', bbox_inches='tight')
-    print('chrF bar chart saved to bing-chat_chrf.[svg/png].')
+    plt.savefig('bing-chat_chrf.pdf', bbox_inches='tight')
+    print('chrF bar chart saved to bing-chat_chrf.[svg/png/pdf].')
 
     # Plot disruption scores
     plt.style.use('ggplot')
@@ -77,7 +78,8 @@ def graphs(json_file: str) -> None:
 
     plt.savefig('bing-chat_disruption.svg', bbox_inches='tight')
     plt.savefig('bing-chat_disruption.png', bbox_inches='tight')
-    print('Disruption bar chart saved to bing-chat_disruption.[svg/png].')
+    plt.savefig('bing-chat_disruption.pdf', bbox_inches='tight')
+    print('Disruption bar chart saved to bing-chat_disruption.[svg/png/pdf].')
 
 if __name__ == '__main__':
     main()

@@ -85,7 +85,8 @@ def hiding_graphs(srcf_pickle_file: str, ml_pickle_file: str) -> None:
                     ha='center', va='bottom')
     plt.savefig('bing_hiding.svg', bbox_inches='tight')
     plt.savefig('bing_hiding.png', bbox_inches='tight')
-    print('Hiding bar chart saved to bing_hiding.[svg/png].')
+    plt.savefig('bing_hiding.pdf', bbox_inches='tight')
+    print('Hiding bar chart saved to bing_hiding.[svg/png/pdf].')
 
 def surfacing_graphs(srcf_pickle_file: str, ml_pickle_file: str) -> None:
     # Load the SRCF pickle file
@@ -149,4 +150,5 @@ def surfacing_graphs(srcf_pickle_file: str, ml_pickle_file: str) -> None:
     fig.suptitle("Bing:\nPerturbed Result from Perturbed Query", fontsize=16, y=1.05)
     plt.savefig('bing_surfacing.svg', bbox_inches='tight')
     plt.savefig('bing_surfacing.png', bbox_inches='tight')
-    print('Surfacing pie charts saved to bing_surfacing.[svg/png].')
+    plt.savefig('bing_surfacing.pdf', bbox_inches='tight')
+    print('Surfacing pie charts saved to bing_surfacing.[svg/png/pdf].')
